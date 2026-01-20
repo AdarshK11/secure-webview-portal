@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - Secure WebView Portal</title>
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; margin: 24px; line-height: 1.4; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; max-width: 520px; }
+    input { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; margin: 8px 0; }
+    button { padding: 10px 14px; border-radius: 10px; border: 1px solid #ccc; cursor: pointer; }
+    button:hover { background: #f4f4f4; }
+    .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    a { color: #0b5bd3; }
+    .note { margin-top: 10px; opacity: 0.75; font-size: 13px; }
+  </style>
+</head>
+
+<body>
+  <h1>Login 🔐</h1>
+
+  <div class="card">
+    <p>This is a fake login page for testing navigation + token flow.</p>
+
+    <label>Email</label>
+    <input id="email" type="email" placeholder="test@example.com" />
+
+    <label>Password</label>
+    <input id="password" type="password" placeholder="••••••••" />
+
+    <div class="row">
+      <button onclick="AuthDemo.login()">Login</button>
+      <a href="./index.html">Back to Home</a>
+    </div>
+
+    <p class="note">
+      Login stores a fake token in <code>localStorage</code> and redirects to Profile.
+      Your Android app should treat the token securely in real apps.
+    </p>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>

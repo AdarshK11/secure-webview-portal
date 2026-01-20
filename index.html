@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Secure WebView Portal</title>
+  <meta name="description" content="PoC portal for Secure Hybrid WebView Container" />
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; margin: 24px; line-height: 1.4; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+    button { padding: 10px 14px; border-radius: 10px; border: 1px solid #ccc; cursor: pointer; margin: 6px 6px 6px 0; }
+    button:hover { background: #f4f4f4; }
+    code { background: #f6f6f6; padding: 2px 6px; border-radius: 6px; }
+    .status { padding: 10px; border-radius: 10px; background: #f6faff; border: 1px solid #cfe7ff; }
+    .warn { padding: 10px; border-radius: 10px; background: #fff7e6; border: 1px solid #ffd79a; }
+    .row { display: flex; flex-wrap: wrap; gap: 8px; }
+    input { padding: 10px; border-radius: 10px; border: 1px solid #ccc; min-width: 260px; }
+    a { color: #0b5bd3; }
+    footer { opacity: 0.7; margin-top: 24px; font-size: 13px; }
+  </style>
+</head>
+
+<body>
+  <h1>Secure WebView Portal ✅</h1>
+  <p>
+    This is the companion portal for the Android <code>Secure Hybrid WebView Container</code> PoC.
+  </p>
+
+  <div class="card status">
+    <h2>Bridge Status</h2>
+    <p id="bridgeStatus">Checking NativeBridge…</p>
+    <p><strong>Current URL:</strong> <span id="currentUrl"></span></p>
+  </div>
+
+  <div class="card">
+    <h2>Web ↔ Native Demo</h2>
+    <p>These buttons will call the Android JS Bridge if the app provides it.</p>
+
+    <div class="row">
+      <button onclick="NativeDemo.getDeviceInfo()">Get device info</button>
+      <button onclick="NativeDemo.copyToken()">Copy a token (native clipboard)</button>
+      <button onclick="NativeDemo.logEvent()">Send log event</button>
+      <button onclick="NativeDemo.triggerNativeToast()">Trigger native toast</button>
+    </div>
+
+    <h3>Output</h3>
+    <pre id="output" style="background:#0b1020;color:#d5e7ff;padding:12px;border-radius:12px;overflow:auto;">(results will appear here)</pre>
+  </div>
+
+  <div class="card">
+    <h2>Navigation / Security Tests</h2>
+    <p>Use these to validate allowlist + external navigation blocking behavior.</p>
+
+    <div class="row">
+      <a href="./login.html">Go to Login (internal)</a>
+      <a href="./profile.html">Go to Profile (internal)</a>
+    </div>
+
+    <div style="margin-top:12px" class="warn">
+      <p><strong>External link test:</strong> should ideally be blocked by your WebView allowlist, or opened in system browser.</p>
+      <p>
+        <a href="https://example.com" target="_blank" rel="noopener noreferrer">Open https://example.com</a>
+      </p>
+    </div>
+
+    <div style="margin-top:12px">
+      <p><strong>Custom URL open test (via native)</strong></p>
+      <input id="urlInput" placeholder="https://example.com" />
+      <button onclick="NativeDemo.openUrlFromInput()">Open URL</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Native Callback Demo</h2>
+    <p>
+      The Android app can call this JS function:
+      <code>window.onNativeMessage(type, payload)</code>
+    </p>
+    <p>
+      Try implementing <code>evaluateJavascript()</code> in Android to call it.
+    </p>
+    <button onclick="NativeDemo.simulateNativeCallback()">Simulate native callback</button>
+  </div>
+
+  <footer>
+    <p>
+      Tip: Open DevTools (in a normal browser) to see logs.  
+      In Android WebView, use <code>chrome://inspect</code> for debugging.
+    </p>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>

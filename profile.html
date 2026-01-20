@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profile - Secure WebView Portal</title>
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; margin: 24px; line-height: 1.4; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; max-width: 720px; }
+    button { padding: 10px 14px; border-radius: 10px; border: 1px solid #ccc; cursor: pointer; margin-right: 8px; }
+    button:hover { background: #f4f4f4; }
+    code { background: #f6f6f6; padding: 2px 6px; border-radius: 6px; }
+    .token { word-break: break-all; background:#0b1020;color:#d5e7ff;padding:12px;border-radius:12px; }
+    a { color: #0b5bd3; }
+  </style>
+</head>
+
+<body>
+  <h1>Profile 👤</h1>
+
+  <div class="card">
+    <p>This page checks whether a token exists in <code>localStorage</code>.</p>
+
+    <h3>Session Token</h3>
+    <div id="tokenBox" class="token">(checking token…)</div>
+
+    <div style="margin-top:12px">
+      <button onclick="AuthDemo.logout()">Logout</button>
+      <button onclick="NativeDemo.copyToken()">Copy token (native clipboard)</button>
+      <a href="./index.html">Back to Home</a>
+    </div>
+
+    <p style="margin-top:14px; opacity:0.75; font-size:13px;">
+      In a real WebView integration, you would avoid storing tokens in JS storage unless required
+      and rely on safer auth patterns (cookies, short-lived tokens, server-side sessions, etc).
+    </p>
+  </div>
+
+  <script src="./script.js"></script>
+  <script>
+    // Show token on page load
+    AuthDemo.renderProfile();
+  </script>
+</body>
+</html>
